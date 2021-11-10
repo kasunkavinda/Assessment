@@ -6,6 +6,8 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,7 +15,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-
+import styleClasses from "./Drawer.module.css";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -23,7 +25,51 @@ const useStyles = makeStyles({
   },
 });
 
+const categories = [
+  {
+    value: "All",
+    label: "All",
+  },
+  {
+    value: "Community",
+    label: "Community",
+  },
+  {
+    value: "Professional",
+    label: "Professional",
+  },
+  {
+    value: "Housing",
+    label: "Housing",
+  },
+  {
+    value: "Buying",
+    label: "Buying",
+  },
+  {
+    value: "Selling",
+    label: "Selling",
+  },
+  {
+    value: "Jobs",
+    label: "Jobs",
+  },
+  {
+    value: "Education",
+    label: "Education",
+  },
+  {
+    value: "Commercial",
+    label: "Commercial",
+  },
+];
+
 const Drawer = () => {
+  const [category, setCurrency] = React.useState("COM");
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
+
   const titleInputref = useRef();
   const categotyInputref = useRef();
   const descriptionInputref = useRef();
@@ -79,40 +125,54 @@ const Drawer = () => {
       })}
       role="presentation"
     >
-      <h2>New Classified</h2>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={submitHandler}
-      >
-        <TextareaAutosize
-          id="title"
-          name="title"
-          label="Title"
-          variant="filled"
-          inputRef={titleInputref}
-        />
-        <TextareaAutosize
-          id="filled-multiline-flexible"
-          label="Multiline"
-          name="category"
-          multiline
-          maxRows={10}
-          variant="filled"
-          inputRef={categotyInputref}
-        />
-        <TextareaAutosize
-          id="filled-multiline-flexible"
-          label="description"
-          name="category"
-          multiline
-          maxRows={10}
-          variant="filled"
-          inputRef={descriptionInputref}
-        />
-
-        {/* <TextField
+      <div className={styleClasses.drawerCard}>
+        <h2>New Classified</h2>
+        <form
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+          onSubmit={submitHandler}
+        >
+          <div className={styleClasses.DrawerTextField}>
+            <TextField
+              id="title"
+              name="title"
+              label="Title"
+              variant="filled"
+              inputRef={titleInputref}
+            />
+          </div>
+          <div className={styleClasses.DrawerTextField}>
+            <TextField
+              id="category"
+              select
+              label="Category"
+              value={category}
+              onChange={handleChange}
+              variant="filled"
+              inputRef={categotyInputref}
+              className={styleClasses.DropTextField}
+            >
+              {categories.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          <div className={styleClasses.DrawerTextField}>
+            <TextareaAutosize
+              id="filled-multiline-flexible"
+              label="description"
+              name="category"
+              multiline
+              maxRows={10}
+              minRows={10}
+              variant="filled"
+              inputRef={descriptionInputref}
+            />
+          </div>
+          {/* <TextField
           id="standard-select-currency-native"
           select
           name="description"
@@ -124,10 +184,16 @@ const Drawer = () => {
           }}
           ref={descriptionInputref}
         ></TextField> */}
-        <Button type="submit" variant="contained" color="primary">
-          SAVE AND PUBLISH
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={styleClasses.rbtnDrawer}
+          >
+            SAVE AND PUBLISH
+          </Button>
+        </form>
+      </div>
     </div>
   );
 

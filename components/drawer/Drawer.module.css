@@ -1,0 +1,15 @@
+.drawerCard {
+  padding: 10%;
+}
+
+.rbtnDrawer {
+  border-radius: 100px !important;
+}
+.DrawerTextField {
+  margin-bottom: 15px;
+}
+
+.DropTextField {
+  margin-bottom: 15px;
+  width: 100%;
+}
