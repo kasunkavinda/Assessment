@@ -24,34 +24,44 @@ const DUMMY_MEETUP = [
   },
 ];
 
-export default function Home({ cardDetailList }) {
+export default function Home({ cardDetailLists }) {
   return (
     <div className={classes.outline}>
       <Drawer />
-      <Grid container spacing={3}>
-        <Grid item xs={4}>
-          <Card className={classes.root}>
-            <CardMedia
-              className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Paella dish"
-            />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Housing{cardDetailList.category}
-              </Typography>
-            </CardContent>
-            <CardHeader title="Shrimp and Chorizo Paella" />
-            {cardDetailList.category}
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                This impressive paella is a perfect party dish and a fun meal to
-                cook together with your guests. Add 1 cup of frozen peas along
-                with the mussels, if you like.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+      <Grid item xs={12}>
+        {cardDetailLists.map((cardDetailList) => (
+          <Grid container spacing={3} key={cardDetailList.id}>
+            <Grid item xs={4}>
+              <Card className={classes.root}>
+                <CardMedia
+                  className={classes.media}
+                  image="/static/images/cards/paella.jpg"
+                  title="Paella dish"
+                />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {cardDetailList.category}
+                  </Typography>
+                </CardContent>
+                <CardHeader title={cardDetailList.title} />
+
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {cardDetailList.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
@@ -68,15 +78,15 @@ export async function getStaticProps() {
   console.log(cardDetails.name);
   client.close();
   return {
-    /*props: {
-      cardDetailList: cardDetails.map((cardDetail) => ({
+    props: {
+      cardDetailLists: cardDetails.map((cardDetail) => ({
         category: cardDetail.category,
         title: cardDetail.title,
         description: cardDetail.description,
         id: cardDetail._id.toString(),
       })),
-    }, */
-    props: { cardDetailList: DUMMY_MEETUP },
+    },
+    // props: { cardDetailLists: DUMMY_MEETUP },
     revalidate: 1000,
   };
 }

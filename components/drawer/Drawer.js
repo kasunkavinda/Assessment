@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,6 +24,40 @@ const useStyles = makeStyles({
 });
 
 const Drawer = () => {
+  const titleInputref = useRef();
+  const categotyInputref = useRef();
+  const descriptionInputref = useRef();
+
+  function submitHandler(event) {
+    event.preventDefault();
+
+    const titleInput = titleInputref.current.value;
+    const categoryInput = categotyInputref.current.value;
+    const descriptionInput = descriptionInputref.current.value;
+
+    const cardData = {
+      title: titleInput,
+      category: categoryInput,
+      description: descriptionInput,
+    };
+
+    async function submitHandlerApi(cardData) {
+      const response = await fetch("/api/new-card", {
+        method: "POST",
+        body: JSON.stringify(cardData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      //   mutate();
+    }
+
+    submitHandlerApi(cardData);
+  }
+
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -51,14 +86,25 @@ const Drawer = () => {
       role="presentation"
     >
       <h2>New Classified</h2>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="filled-basic" label="Title" variant="filled" />
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={submitHandler}
+      >
+        <TextField
+          id="filled-basic"
+          label="Title"
+          variant="filled"
+          ref={titleInputref}
+        />
         <TextareaAutosize
           id="filled-multiline-flexible"
           label="Multiline"
           multiline
           maxRows={10}
           variant="filled"
+          ref={categotyInputref}
         />
         <TextField
           id="standard-select-currency-native"
@@ -68,8 +114,9 @@ const Drawer = () => {
             native: true,
           }}
           helperText="Please select your currency"
+          ref={descriptionInputref}
         ></TextField>
-        <Button variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary">
           SAVE AND PUBLISH
         </Button>
       </form>
