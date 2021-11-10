@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import Link from "next/link";
 import classes from "./FrontCard.module.css";
 import Drawer from "../components/drawer/Drawer";
 
@@ -58,6 +59,11 @@ export default function Home({ cardDetailLists }) {
                     {cardDetailList.description}
                   </Typography>
                 </CardContent>
+                <Link href={`/single-card/${cardDetailList.id}`}>
+                  <a className="bg-green-400 p-2 text-white rounded">
+                    Read More
+                  </a>
+                </Link>
               </Card>
             </Grid>
           </Grid>
