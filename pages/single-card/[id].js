@@ -61,7 +61,6 @@ export async function getStaticPaths() {
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
   const cardDetails = await cardCollection.find({}, { _id: 1 }).toArray();
-  console.log(cardDetails.name);
 
   //closing the connection
   client.close();
@@ -86,8 +85,8 @@ export async function getStaticProps(context) {
     props: {
       cardDetailLists: {
         id: selectedCard._id.toString(),
-        category: selectedCard.category,
         title: selectedCard.title,
+        category: selectedCard.category,
         description: selectedCard.description,
       },
     },
