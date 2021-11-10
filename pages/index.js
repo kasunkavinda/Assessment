@@ -29,43 +29,31 @@ export default function Home({ cardDetailLists }) {
   return (
     <div className={classes.outline}>
       <Drawer />
-      <Grid item xs={12}>
+      <Grid container spacing={3}>
         {cardDetailLists.map((cardDetailList) => (
-          <Grid container spacing={3} key={cardDetailList.id}>
-            <Grid item xs={4}>
-              <Card className={classes.root}>
-                <CardMedia
-                  className={classes.media}
-                  image="/static/images/cards/paella.jpg"
-                  title="Paella dish"
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {cardDetailList.category}
-                  </Typography>
-                </CardContent>
-                <CardHeader title={cardDetailList.title} />
+          <Grid item xs={12} sm={4} key={cardDetailList.id}>
+            <Card className={classes.root}>
+              <CardMedia
+                className={classes.media}
+                image="/card.jpg"
+                title="Paella dish"
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {cardDetailList.category}
+                </Typography>
+              </CardContent>
+              <CardHeader title={cardDetailList.title} />
 
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    {cardDetailList.description}
-                  </Typography>
-                </CardContent>
-                <Link href={`/single-card/${cardDetailList.id}`}>
-                  <a className="bg-green-400 p-2 text-white rounded">
-                    Read More
-                  </a>
-                </Link>
-              </Card>
-            </Grid>
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {cardDetailList.description}
+                </Typography>
+              </CardContent>
+              <Link href={`/single-card/${cardDetailList.id}`}>
+                <a className={classes.readMore}>Read More</a>
+              </Link>
+            </Card>
           </Grid>
         ))}
       </Grid>

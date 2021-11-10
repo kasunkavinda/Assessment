@@ -4,9 +4,19 @@
 
 .root {
   max-width: 345;
+  height: 400px;
+  margin-top: 20px;
 }
 
 .media {
-  height: 0;
+  width: 100%;
+  height: 100px;
   padding-top: "56.25%";
+}
+.readMore {
+  background-color: #3f51b5;
+  padding: 10px;
+  color: white;
+  margin: 10px;
+  border-radius: 5px;
 }

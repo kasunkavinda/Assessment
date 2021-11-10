@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MongoClient, ObjectId } from "mongodb";
 import classes from "../../styles/singleCard.module.css";
 import {
@@ -16,13 +17,20 @@ import {
 const singleCard = ({ cardDetailLists }) => {
   return (
     <div>
-      <Grid item xs={12}>
-        <Grid container spacing={3} key={cardDetailLists.id}>
-          <Grid item xs={4}>
+      <Grid item xs={12} className={classes.singleCardWrapper}>
+        <Link href="/">
+          <a className={classes.goBack}>Go Back</a>
+        </Link>
+        <Grid
+          container
+          className={classes.singleInsiCardWrap}
+          key={cardDetailLists.id}
+        >
+          <Grid item xs={12}>
             <Card className={classes.root}>
               <CardMedia
                 className={classes.media}
-                image="/static/images/cards/paella.jpg"
+                image="/card.jpg"
                 title="Paella dish"
               />
               <CardContent>
