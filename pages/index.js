@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import React from "react";
 import Link from "next/link";
 import classes from "./FrontCard.module.css";
 import Drawer from "../components/drawer/Drawer";
@@ -10,15 +11,17 @@ import {
   CardContent,
   Typography,
   CardActions,
-  IconButton,
-  FavoriteIcon,
   ExpandMoreIcon,
   Grid,
 } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { red } from "@material-ui/core/colors";
 
 const database_url = process.env.DATABASE_URL;
 
 export default function Home({ cardDetailLists }) {
+  const [fav, setFav] = React.useState(false);
   return (
     <div className={classes.outline}>
       <Drawer />
@@ -26,6 +29,28 @@ export default function Home({ cardDetailLists }) {
         {cardDetailLists.map((cardDetailList) => (
           <Grid item xs={12} sm={4} key={cardDetailList.id}>
             <Card className={classes.root}>
+              {fav && (
+                <IconButton
+                  onClick={() => {
+                    setFav(!fav);
+                  }}
+                  aria-label="delete"
+                  color="primary"
+                >
+                  <FavoriteIcon></FavoriteIcon>
+                </IconButton>
+              )}
+              {!fav && (
+                <IconButton
+                  onClick={() => {
+                    setFav(!fav);
+                  }}
+                  aria-label="delete"
+                  color="primary"
+                >
+                  <FavoriteIcon></FavoriteIcon>
+                </IconButton>
+              )}
               <CardMedia
                 className={classes.media}
                 image="/card.jpg"

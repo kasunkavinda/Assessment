@@ -16,17 +16,17 @@ const Navigation = () => {
       <Grid container spacing={3}>
         <AppBar position="static">
           <Toolbar className={classes.backgroundColor}>
-            <Grid item sm={10}>
+            <Grid item xs={10}>
               <Typography variant="h6" className={classes.title}>
                 Classfied Ads
               </Typography>
             </Grid>
-            <Grid item sm={1}>
+            <Grid item xs={1}>
               <Typography variant="h6" className={classes.home}>
                 HOME
               </Typography>
             </Grid>
-            <Grid item sm={1}>
+            <Grid item xs={1}>
               <Typography variant="h6" className={classes.favorites}>
                 FAVORITES
               </Typography>

@@ -7,18 +7,12 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import styleClasses from "./Drawer.module.css";
+import { IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 400,
   },
   fullList: {
     width: "auto",
@@ -100,6 +94,7 @@ const Drawer = () => {
       console.log(data);
     }
     addCardDataHandler(cardData);
+    clear();
   }
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -117,7 +112,11 @@ const Drawer = () => {
 
     setState({ ...state, [anchor]: open });
   };
-
+  const clear = () => {
+    titleInputref.current.value = "";
+    setCurrency(null);
+    descriptionInputref.current.value = "";
+  };
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -126,6 +125,11 @@ const Drawer = () => {
       role="presentation"
     >
       <div className={styleClasses.drawerCard}>
+        <div className={styleClasses.drawerCloseIcon}>
+          <IconButton onClick={toggleDrawer(anchor, false)}>
+            <CloseIcon />
+          </IconButton>
+        </div>
         <h2>New Classified</h2>
         <form
           className={classes.root}
@@ -139,6 +143,7 @@ const Drawer = () => {
               name="title"
               label="Title"
               variant="filled"
+              className={styleClasses.DropTextField}
               inputRef={titleInputref}
             />
           </div>
@@ -169,21 +174,11 @@ const Drawer = () => {
               maxRows={10}
               minRows={10}
               variant="filled"
+              className={styleClasses.DropTextField}
               inputRef={descriptionInputref}
             />
           </div>
-          {/* <TextField
-          id="standard-select-currency-native"
-          select
-          name="description"
-          variant="outlined"
-          label="test"
-          SelectProps={{
-            multiple: true,
-            value: [],
-          }}
-          ref={descriptionInputref}
-        ></TextField> */}
+
           <Button
             type="submit"
             variant="contained"

@@ -7,9 +7,14 @@
 }
 .DrawerTextField {
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .DropTextField {
   margin-bottom: 15px;
   width: 100%;
+}
+
+.drawerCloseIcon {
+  float: right;
 }
