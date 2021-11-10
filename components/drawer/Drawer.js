@@ -61,6 +61,11 @@ const categories = [
 
 //drawer component
 const Drawer = () => {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
   const [category, setCurrency] = React.useState("Commercial");
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -81,6 +86,7 @@ const Drawer = () => {
       title: enteredTitle,
       category: enteredCategory,
       description: enteredDescription,
+      favorite: false,
     };
 
     async function addCardDataHandler(cardData) {
@@ -94,14 +100,10 @@ const Drawer = () => {
 
       const data = await response.json();
       console.log(data);
+      setState({ ...state, ["right"]: false });
     }
     addCardDataHandler(cardData);
   }
-
-  const classes = useStyles();
-  const [state, setState] = React.useState({
-    right: false,
-  });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

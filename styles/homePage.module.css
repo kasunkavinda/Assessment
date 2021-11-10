@@ -21,3 +21,17 @@
   margin: 10px;
   border-radius: 5px;
 }
+
+.drawerWrapper {
+  text-align: right;
+}
+
+.DrawerTextField {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.DropTextField {
+  margin-bottom: 15px;
+  width: 100%;
+}

@@ -91,6 +91,6 @@ export async function getStaticProps(context) {
         description: selectedCard.description,
       },
     },
-    revalidate: 3200,
+    revalidate: 10,
   };
 }

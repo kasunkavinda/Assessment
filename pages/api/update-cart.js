@@ -2,8 +2,8 @@ import { MongoClient } from "mongodb";
 
 const database_url = process.env.DATABASE_URL;
 
-async function handler(req, res) {
-  if (req.method === "POST") {
+async function updateHandler(req, res) {
+  if (req.method === "PATCH") {
     const data = req.body;
 
     //expects this type of object
@@ -14,14 +14,16 @@ async function handler(req, res) {
     //connecting
     const db = client.db();
     const cardCollection = db.collection("CardCollection");
-    const result = await cardCollection.insertOne(data);
+    const result = await cardCollection.updateOne(data.id, {
+      favorite: data.favorite,
+    });
     console.log(data);
 
     //closing the connection
     client.close();
 
-    res.status(201).json({ messgae: "Card Inserted" });
+    res.status(201).json({ messgae: "Card Updated" });
   }
 }
 
-export default handler;
+export default updateHandler;

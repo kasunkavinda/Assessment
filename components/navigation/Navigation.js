@@ -1,14 +1,7 @@
 import Link from "next/link";
 import Grid from "@material-ui/core/Grid";
 import classes from "./Navigation.module.css";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  MenuIcon,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 const Navigation = () => {
   return (
@@ -22,9 +15,13 @@ const Navigation = () => {
               </Typography>
             </Grid>
             <Grid item xs={1}>
-              <Typography variant="h6" className={classes.home}>
-                HOME
-              </Typography>
+              <Link href="/">
+                <a>
+                  <Typography variant="h6" className={classes.home}>
+                    HOME
+                  </Typography>
+                </a>
+              </Link>
             </Grid>
             <Grid item xs={1}>
               <Typography variant="h6" className={classes.favorites}>
