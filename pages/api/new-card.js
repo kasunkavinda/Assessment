@@ -4,7 +4,7 @@ async function handler(req, res) {
     const data = req.body;
 
     //expects this type of object
-    // const { category, title, description, id } = data;
+    // const { category, title, description } = data;
 
     const client = await MongoClient.connect(
       "mongodb+srv://kasunkavinda:kasunkavinda456123@cluster0.oxj4i.mongodb.net/myPortfolio?retryWrites=true&w=majority"

@@ -31,17 +31,17 @@ const Drawer = () => {
   function submitHandler(event) {
     event.preventDefault();
 
-    const titleInput = titleInputref.current.value;
-    const categoryInput = categotyInputref.current.value;
-    const descriptionInput = descriptionInputref.current.value;
-
+    const enteredTitle = titleInputref.current.value;
+    const enteredCategory = categotyInputref.current.value;
+    const enteredDescription = descriptionInputref.current.value;
+    console.log(enteredTitle);
     const cardData = {
-      title: titleInput,
-      category: categoryInput,
-      description: descriptionInput,
+      title: enteredTitle,
+      category: enteredCategory,
+      description: enteredDescription,
     };
 
-    async function submitHandlerApi(cardData) {
+    async function addCardDataHandler(cardData) {
       const response = await fetch("/api/new-card", {
         method: "POST",
         body: JSON.stringify(cardData),
@@ -51,13 +51,10 @@ const Drawer = () => {
       });
 
       const data = await response.json();
-
-      //   mutate();
+      console.log(data);
     }
-
-    submitHandlerApi(cardData);
+    addCardDataHandler(cardData);
   }
-
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -93,29 +90,43 @@ const Drawer = () => {
         onSubmit={submitHandler}
       >
         <TextField
-          id="filled-basic"
+          id="title"
+          name="title"
           label="Title"
           variant="filled"
-          ref={titleInputref}
+          inputRef={titleInputref}
         />
         <TextareaAutosize
           id="filled-multiline-flexible"
           label="Multiline"
+          name="category"
           multiline
           maxRows={10}
           variant="filled"
-          ref={categotyInputref}
+          inputRef={categotyInputref}
         />
-        <TextField
+        <TextareaAutosize
+          id="filled-multiline-flexible"
+          label="description"
+          name="category"
+          multiline
+          maxRows={10}
+          variant="filled"
+          inputRef={descriptionInputref}
+        />
+
+        {/* <TextField
           id="standard-select-currency-native"
           select
-          label="Native select"
+          name="description"
+          variant="outlined"
+          label="test"
           SelectProps={{
-            native: true,
+            multiple: true,
+            value: [],
           }}
-          helperText="Please select your currency"
           ref={descriptionInputref}
-        ></TextField>
+        ></TextField> */}
         <Button type="submit" variant="contained" color="primary">
           SAVE AND PUBLISH
         </Button>
