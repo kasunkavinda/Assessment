@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import React from "react";
 import Link from "next/link";
-import classes from "./FrontCard.module.css";
+import classes from "../styles/homePage.module.css";
 import Drawer from "../components/drawer/Drawer";
 
 import {
@@ -10,13 +10,10 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions,
-  ExpandMoreIcon,
   Grid,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { red } from "@material-ui/core/colors";
 
 const database_url = process.env.DATABASE_URL;
 
@@ -80,12 +77,15 @@ export default function Home({ cardDetailLists }) {
 }
 
 export async function getStaticProps() {
+  //connecting
   const client = await MongoClient.connect(database_url);
 
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
   const cardDetails = await cardCollection.find().toArray();
   console.log(cardDetails.name);
+
+  //closing connection
   client.close();
   return {
     props: {
@@ -96,7 +96,7 @@ export async function getStaticProps() {
         id: cardDetail._id.toString(),
       })),
     },
-    // props: { cardDetailLists: DUMMY_MEETUP },
-    revalidate: 1000,
+
+    revalidate: 3200,
   };
 }

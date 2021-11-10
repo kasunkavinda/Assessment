@@ -7,10 +7,6 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  CardActions,
-  IconButton,
-  FavoriteIcon,
-  ExpandMoreIcon,
   Grid,
 } from "@material-ui/core";
 
@@ -33,7 +29,8 @@ const singleCard = ({ cardDetailLists }) => {
               <CardMedia
                 className={classes.media}
                 image="/card.jpg"
-                title="Paella dish"
+                title="card image"
+                alt="card image"
               />
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
@@ -58,12 +55,15 @@ const singleCard = ({ cardDetailLists }) => {
 export default singleCard;
 
 export async function getStaticPaths() {
+  //connecting
   const client = await MongoClient.connect(database_url);
 
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
   const cardDetails = await cardCollection.find({}, { _id: 1 }).toArray();
   console.log(cardDetails.name);
+
+  //closing the connection
   client.close();
   return {
     fallback: true,
@@ -91,6 +91,6 @@ export async function getStaticProps(context) {
         description: selectedCard.description,
       },
     },
-    revalidate: 1,
+    revalidate: 3200,
   };
 }

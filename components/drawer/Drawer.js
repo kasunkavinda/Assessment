@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
+// dropdown values
 const categories = [
   {
     value: "All",
@@ -58,8 +59,9 @@ const categories = [
   },
 ];
 
+//drawer component
 const Drawer = () => {
-  const [category, setCurrency] = React.useState("COM");
+  const [category, setCurrency] = React.useState("Commercial");
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
@@ -74,7 +76,7 @@ const Drawer = () => {
     const enteredTitle = titleInputref.current.value;
     const enteredCategory = categotyInputref.current.value;
     const enteredDescription = descriptionInputref.current.value;
-    console.log(enteredTitle);
+
     const cardData = {
       title: enteredTitle,
       category: enteredCategory,
@@ -94,8 +96,8 @@ const Drawer = () => {
       console.log(data);
     }
     addCardDataHandler(cardData);
-    clear();
   }
+
   const classes = useStyles();
   const [state, setState] = React.useState({
     right: false,
@@ -112,11 +114,7 @@ const Drawer = () => {
 
     setState({ ...state, [anchor]: open });
   };
-  const clear = () => {
-    titleInputref.current.value = "";
-    setCurrency(null);
-    descriptionInputref.current.value = "";
-  };
+
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -168,8 +166,8 @@ const Drawer = () => {
           <div className={styleClasses.DrawerTextField}>
             <TextareaAutosize
               id="filled-multiline-flexible"
-              label="description"
-              name="category"
+              label="Description"
+              name="description"
               multiline
               maxRows={10}
               minRows={10}
