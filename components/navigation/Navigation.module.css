@@ -1,0 +1,19 @@
+.backgroundColor {
+  padding-top: 10px;
+  background-color: white;
+}
+
+.title {
+  color: black;
+}
+
+.home,
+.favorites {
+  color: black;
+}
+
+.home:hover,
+.favorites:hover {
+  color: #6202ee;
+  cursor: pointer;
+}
