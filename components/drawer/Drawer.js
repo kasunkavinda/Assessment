@@ -57,9 +57,6 @@ const Drawer = () => {
   }
   const classes = useStyles();
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
     right: false,
   });
 
@@ -89,7 +86,7 @@ const Drawer = () => {
         autoComplete="off"
         onSubmit={submitHandler}
       >
-        <TextField
+        <TextareaAutosize
           id="title"
           name="title"
           label="Title"

@@ -14,6 +14,8 @@ import {
   Grid,
 } from "@material-ui/core";
 
+const database_url = process.env.DATABASE_URL;
+
 const singleCard = ({ cardDetailLists }) => {
   return (
     <div>
@@ -56,9 +58,7 @@ const singleCard = ({ cardDetailLists }) => {
 export default singleCard;
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://kasunkavinda:kasunkavinda456123@cluster0.oxj4i.mongodb.net/myPortfolio?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(database_url);
 
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
@@ -75,9 +75,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const id = context.params.id;
-  const client = await MongoClient.connect(
-    "mongodb+srv://kasunkavinda:kasunkavinda456123@cluster0.oxj4i.mongodb.net/myPortfolio?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(database_url);
 
   const db = client.db();
   const cardCollection = db.collection("CardCollection");

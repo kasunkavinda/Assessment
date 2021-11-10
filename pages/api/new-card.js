@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+const database_url = process.env.DATABASE_URL;
 async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
@@ -6,9 +7,7 @@ async function handler(req, res) {
     //expects this type of object
     // const { category, title, description } = data;
 
-    const client = await MongoClient.connect(
-      "mongodb+srv://kasunkavinda:kasunkavinda456123@cluster0.oxj4i.mongodb.net/myPortfolio?retryWrites=true&w=majority"
-    );
+    const client = await MongoClient.connect(database_url);
 
     const db = client.db();
     const cardCollection = db.collection("CardCollection");

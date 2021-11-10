@@ -16,14 +16,7 @@ import {
   Grid,
 } from "@material-ui/core";
 
-const DUMMY_MEETUP = [
-  {
-    category: "cat1",
-    title: "title1",
-    description: "description1",
-    id: 5,
-  },
-];
+const database_url = process.env.DATABASE_URL;
 
 export default function Home({ cardDetailLists }) {
   return (
@@ -62,9 +55,7 @@ export default function Home({ cardDetailLists }) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://kasunkavinda:kasunkavinda456123@cluster0.oxj4i.mongodb.net/myPortfolio?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(database_url);
 
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
