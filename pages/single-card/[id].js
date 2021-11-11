@@ -82,8 +82,7 @@ export async function getStaticProps(context) {
   const selectedCard = await cardCollection.findOne({ _id: ObjectId(id) });
 
   client.close();
-  console.log("kasun", id);
-  console.log("selected card", selectedCard);
+
   return {
     props: {
       cardDetailLists: {
@@ -94,6 +93,6 @@ export async function getStaticProps(context) {
         favorite: selectedCard.favorite,
       },
     },
-    revalidate: 10,
+    revalidate: 2,
   };
 }

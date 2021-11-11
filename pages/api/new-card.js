@@ -15,7 +15,6 @@ async function handler(req, res) {
     const db = client.db();
     const cardCollection = db.collection("CardCollection");
     const result = await cardCollection.insertOne(data);
-    console.log(data);
 
     //closing the connection
     client.close();

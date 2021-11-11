@@ -99,7 +99,7 @@ const Drawer = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+
       setState({ ...state, ["right"]: false });
     }
     addCardDataHandler(cardData);

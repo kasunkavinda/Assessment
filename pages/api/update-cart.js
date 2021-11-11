@@ -17,7 +17,6 @@ async function updateHandler(req, res) {
     const result = await cardCollection.updateOne(data.id, {
       favorite: data.favorite,
     });
-    console.log(data);
 
     //closing the connection
     client.close();
