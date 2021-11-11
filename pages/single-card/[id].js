@@ -65,7 +65,7 @@ export async function getStaticPaths() {
   //closing the connection
   client.close();
   return {
-    fallback: true,
+    fallback: "blocking",
     paths: cardDetails.map((cardDetail) => ({
       params: { id: cardDetail._id.toString() },
     })),
@@ -74,6 +74,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const id = context.params.id;
+
   const client = await MongoClient.connect(database_url);
 
   const db = client.db();
@@ -81,13 +82,16 @@ export async function getStaticProps(context) {
   const selectedCard = await cardCollection.findOne({ _id: ObjectId(id) });
 
   client.close();
+  console.log("kasun", id);
+  console.log("selected card", selectedCard);
   return {
     props: {
       cardDetailLists: {
         id: selectedCard._id.toString(),
         title: selectedCard.title,
-        category: selectedCard.category,
+        category: selectedCard.category.toString(),
         description: selectedCard.description,
+        favorite: selectedCard.favorite,
       },
     },
     revalidate: 10,

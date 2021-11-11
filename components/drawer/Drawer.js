@@ -66,9 +66,9 @@ const Drawer = () => {
     right: false,
   });
 
-  const [category, setCurrency] = React.useState("Commercial");
+  const [category, setCategory] = React.useState("Commercial");
   const handleChange = (event) => {
-    setCurrency(event.target.value);
+    setCategory(event.target.value);
   };
 
   const titleInputref = useRef();

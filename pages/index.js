@@ -77,7 +77,7 @@ export default function Home({ cardDetailLists }) {
       });
     }
   }
-  console.log(category);
+
   return (
     <div className={classes.outline}>
       <Grid container spacing={3}>
@@ -166,15 +166,14 @@ export async function getStaticProps() {
   const db = client.db();
   const cardCollection = db.collection("CardCollection");
   const cardDetails = await cardCollection.find().toArray();
-  console.log(cardDetails.name);
 
   //closing connection
   client.close();
   return {
     props: {
       cardDetailLists: cardDetails.map((cardDetail) => ({
-        category: cardDetail.category,
         title: cardDetail.title,
+        category: cardDetail.category,
         description: cardDetail.description,
         favorite: cardDetail.favorite,
         id: cardDetail._id.toString(),
