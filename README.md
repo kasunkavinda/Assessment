@@ -1,3 +1,5 @@
+[Sample Deployment](https://assessment-6dxtaatzr-kasunkavinda.vercel.app/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -20,8 +22,6 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 Create a .env file.
 Set DATABASE_URL ( MongoDB )
-
-[Sample Deployment](https://assessment-6dxtaatzr-kasunkavinda.vercel.app/)
 
 ## Learn More
 
